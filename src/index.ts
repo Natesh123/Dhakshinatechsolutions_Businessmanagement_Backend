@@ -64,9 +64,13 @@ const startServer = async () => {
   await sequelize.sync({ alter: true });
   console.log('Database synchronized.');
 
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
+  if (process.env.NODE_ENV !== 'production') {
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  }
 };
 
 startServer();
+
+export default app;
