@@ -55,6 +55,8 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
+import serverless from 'serverless-http';
+
 // Start Server
 const startServer = async () => {
   await connectDB();
@@ -73,4 +75,5 @@ const startServer = async () => {
 
 startServer();
 
+export const handler = serverless(app);
 export default app;
