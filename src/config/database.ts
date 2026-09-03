@@ -19,7 +19,13 @@ export const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   define: {
     timestamps: true,
     underscored: true
-  }
+  },
+  dialectOptions: process.env.DB_SSL === 'true' ? {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  } : {}
 });
 
 export const connectDB = async () => {
