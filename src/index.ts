@@ -59,17 +59,21 @@ import serverless from 'serverless-http';
 
 // Start Server
 const startServer = async () => {
-  await connectDB();
-  
-  // Sync database models
-  // Note: in production, use migrations instead of sync()
-  await sequelize.sync({ alter: true });
-  console.log('Database synchronized.');
+  try {
+    await connectDB();
+    
+    // Sync database models
+    // Note: in production, use migrations instead of sync()
+    await sequelize.sync({ alter: true });
+    console.log('Database synchronized.');
 
-  if (process.env.NODE_ENV !== 'production') {
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
+    if (process.env.NODE_ENV !== 'production') {
+      app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+      });
+    }
+  } catch (error) {
+    console.error('Failed to initialize server:', error);
   }
 };
 
