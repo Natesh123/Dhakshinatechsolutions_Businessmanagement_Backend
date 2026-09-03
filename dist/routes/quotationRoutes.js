@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const quotationController_1 = require("../controllers/quotationController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.get('/', quotationController_1.getQuotations);
+router.get('/:id', quotationController_1.getQuotationById);
+router.get('/:id/pdf', quotationController_1.downloadQuotationPdf);
+router.post('/', quotationController_1.createQuotation);
+router.put('/:id', quotationController_1.updateQuotation);
+router.delete('/:id', quotationController_1.deleteQuotation);
+exports.default = router;

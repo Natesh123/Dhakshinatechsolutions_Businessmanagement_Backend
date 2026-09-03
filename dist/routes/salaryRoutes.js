@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const salaryController_1 = require("../controllers/salaryController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.get('/', salaryController_1.getSalaryPayments);
+router.get('/:id', salaryController_1.getSalaryPaymentById);
+router.post('/', salaryController_1.createSalaryPayment);
+router.put('/:id', salaryController_1.updateSalaryPayment);
+router.delete('/:id', salaryController_1.deleteSalaryPayment);
+exports.default = router;

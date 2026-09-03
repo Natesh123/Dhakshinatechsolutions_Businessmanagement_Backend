@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const paymentController_1 = require("../controllers/paymentController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.put('/:id', paymentController_1.updatePayment);
+router.use(auth_1.authenticateJWT);
+router.get('/', paymentController_1.getPayments);
+router.get('/:id', paymentController_1.getPaymentById);
+router.get('/:id/pdf', paymentController_1.downloadReceiptPdf);
+router.post('/', paymentController_1.createPayment);
+router.delete('/:id', paymentController_1.deletePayment);
+exports.default = router;
