@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+import * as mysql2 from 'mysql2'; // Required for Sequelize with bundlers
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ export const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   host: dbHost,
   port: dbPort,
   dialect: 'mysql',
+  dialectModule: mysql2, // Explicitly provide the dialect module for bundlers
   logging: false, // Set to true to see SQL queries
   define: {
     timestamps: true,
